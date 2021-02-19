@@ -111,7 +111,7 @@ int main(int argc, char* args[]){
 	printf("%s\n", hex_string);
 
 	char* ascii_string = convert_hex_to_ascii(hex_string);
-
+	printf("ascii is %s", ascii_string);
 	char* b64 = NULL;
 	b64 = malloc(sizeof(char) * strlen(ascii_string));
 	b64 = string_to_b64(ascii_string, b64);
