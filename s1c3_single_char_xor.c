@@ -116,7 +116,7 @@ int main(int argc, char* argv[]){
 
 	}
 	for(int i=0; i < (int)strlen(value); i++){
-		printf("%c", value[i] ^  'X');
+		printf("%c", value[i] ^  res);
 	}
 	return 0;
 }

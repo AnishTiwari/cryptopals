@@ -17,3 +17,10 @@ s1c3-build:
 
 s1c3: s1c3-build
 	./s1c3.o "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
+
+
+s1c4-build:
+	gcc s1c4.c -o s1c4.o
+
+s1c4: s1c4-build
+	./s1c4.o
