@@ -24,3 +24,10 @@ s1c4-build:
 
 s1c4: s1c4-build
 	./s1c4.o
+
+
+s1c5-build:
+	gcc s1c5.c -o s1c5.o 
+
+s1c5: s1c5-build
+	./s1c5.o "./s1c5.txt" "ICE"
