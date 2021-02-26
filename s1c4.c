@@ -47,7 +47,7 @@ int main(){
 	char res ;
 	char* value = NULL;
 	value = malloc(sizeof(char) * 61);
-		float best_score = -1;
+	float best_score = -1;
 
 	while(fscanf(fp, "%s\n", file_line) == 1){
 		value = convert_hex_to_ascii(file_line);
@@ -95,10 +95,10 @@ int main(){
 			}
 		}
 	}
-			for(int i=0; i < (int)strlen(string); i++){
-			printf("%c", string[i] ^  res
-				);
-		}
+	for(int i=0; i < (int)strlen(string); i++){
+		printf("%c", string[i] ^  res
+			);
+	}
 
 	return 0;
 }

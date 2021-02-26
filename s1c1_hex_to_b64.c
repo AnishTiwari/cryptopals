@@ -104,12 +104,10 @@ int main(int argc, char* args[]){
 		perror("Invalid Arg");
 		exit(1);
 	}
-
 	char* hex_string =NULL;
 	hex_string = malloc(sizeof(char) *strlen(args[1]));
 	hex_string = args[1];
 	printf("%s\n", hex_string);
-
 	char* ascii_string = convert_hex_to_ascii(hex_string);
 	printf("ascii is %s", ascii_string);
 	char* b64 = NULL;

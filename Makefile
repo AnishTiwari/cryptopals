@@ -31,3 +31,10 @@ s1c5-build:
 
 s1c5: s1c5-build
 	./s1c5.o "./s1c5.txt" "ICE"
+
+
+s1c6-build:
+	gcc s1c6.c -o s1c6.o
+
+s1c6: s1c6-build
+	./s1c6.o "./s1c6.txt"
