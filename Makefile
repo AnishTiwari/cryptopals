@@ -41,3 +41,12 @@ s1c6-build: s1c6-shell
 
 s1c6: s1c6-build
 	./s1c6.o "./s1c6.txt"
+
+
+s1c7-shell:
+	$(shell curl https://cryptopals.com/static/challenge-data/7.txt > s1c7.txt)
+	$(shell base64 -d s1c7.txt > s1c7_decoded.txt)
+s1c7-build:s1c7-shell
+	gcc -g s1c7.c -lssl -lcrypto -o s1c7.o 
+s1c7:s1c7-build
+	./s1c7.o
