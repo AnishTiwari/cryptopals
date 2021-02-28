@@ -50,3 +50,10 @@ s1c7-build:s1c7-shell
 	gcc -g s1c7.c -lssl -lcrypto -o s1c7.o 
 s1c7:s1c7-build
 	./s1c7.o
+
+s1c8-shell:
+	$(shell curl https://cryptopals.com/static/challenge-data/8.txt > s1c8.txt)
+s1c8-build:
+	gcc -g s1c8.c -o s1c8.o
+s1c8:s1c8-build
+	./s1c8.o
