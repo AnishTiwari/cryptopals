@@ -2,6 +2,30 @@
 #include<stdlib.h>
 #include<string.h>
 
+unsigned char* take_n_bits(int start,int end, unsigned char* arr, int delimit, int idx){
+	unsigned char* string = NULL;
+	if(delimit){
+		start +=idx;
+		string = malloc(sizeof(unsigned char) * 321);
+		int j = 0;
+		/* printf("start is %d\n", start); */
+		for(int i = start; arr[i] !=  '\n'; i++)
+			string[j++] = arr[i];
+		string[j] = '\0';
+
+	}
+
+	else
+	{
+		string = malloc(sizeof(unsigned char) * (end - start)+1);
+		int j = 0;
+		for(int i = start; i < end; i++)
+			string[j++] = arr[i];
+		string[j] = '\0';
+	}
+	return string;
+}
+
 unsigned char* file_read(char* filename){
 
 	FILE *f = fopen(filename, "r");
@@ -19,44 +43,28 @@ unsigned char* file_read(char* filename){
 
 int main(){
 	unsigned char* filearr = file_read("s1c8.txt");
-	int same=0;
-	printf("blocks are %d",(int)strlen((const char*)filearr));
         /* 32 bytes sized blocks */
-	for(int i=0; i < (int)strlen((const char*)filearr)/32; i+=1){
-		printf("i is %d\n", i);
-		int pi = (i == 0) ? 0 : (i * 32);
-		int idx = pi + 32;
-		int bool = 0;
-		int iter = 0;
-	        while(idx < (int)strlen((const char*)filearr)-1){
-			iter++;
-			printf("idx is %d -> %c - %c po is %d \n ", idx,filearr[pi%32], filearr[idx],pi);
-			if(filearr[pi%32] == filearr[idx])
-			{
-				printf("same for %d %c bool %d\n", idx, filearr[idx],bool);
-				if((idx+1) % 32 == 0 && idx != i+32 ){
-					bool++;
-					if(bool == 32){
-						printf("count %d\n\n\n----------------------------",same+1),same+=1;
-					}
-					bool=0;
-					pi=0;
-					idx ++;
+	int idx = 0;
+	for  (int block =0; block < (int)strlen((const char*)filearr); block+=320)
+	{	unsigned char* block_char = NULL;
+		block_char = take_n_bits(block, block+320, filearr,1, idx);
+		/* printf("BLOCK IS %s %d \n\n", block_char,block); */
+		for(int i=0; i < (int)strlen((char *)block_char); i+=32){
+			unsigned char* str1 = take_n_bits(i, i+32, block_char,0,idx);
+			for(int j=i+32; j <= (int)strlen((const char*)block_char);j +=32){
+				unsigned char* str2 = take_n_bits(j, j+32, block_char,0,idx);
+				/* printf("%s %s \n", str1, str2); */
+				if (strcmp((const char *)str1,(const char *)str2) == 0)
+				{	printf("\n\n%s - %s at block %d\n\n%s",str1,str2,idx+1,block_char);
+					return 0;
 				}
-				else{
-					bool++;
-					idx++;
-					pi++;
-				}
-			}else
-			{
-				/* if(idx %32 ==0) */
-				/* 	break; */
-				pi=0,bool=0,idx += (idx%32);
+				free(str2);
 			}
+			free(str1);
 		}
-		printf("I is %d\n\n", i);
+		idx++;
+		free(block_char);
 	}
-	printf("--%d",same);
+	free(filearr);
 	return 0;
 }
